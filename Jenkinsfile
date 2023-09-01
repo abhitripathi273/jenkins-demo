@@ -10,16 +10,12 @@ node {
    stage("Runing unit tests") {
       sh "./mvnw test -Punit"
     }
-  stage('SonarQube Analysis') {
-    def scannerHome = tool 'SonarScanner';
-	def sonarRunner = tool name: 'SonarQubeScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation';
+    stage('SonarQube Analysis') {
+    def mvn = tool 'Default Maven';
     withSonarQubeEnv() {
-      sh "${scannerHome}/conf"
-      sh """
-       ${sonarRunner}/bin/sonar-scanner
-    """
+      	sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=jenkins-sonar -Dsonar.projectName='jenkins-sonar'"
     }
-  }
+   }
     stage("Deployment") {
       sh 'nohup ./mvnw spring-boot:run -Dserver.port=8001 &'
     }
