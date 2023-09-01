@@ -24,7 +24,7 @@ node {
         -Dsonar.sources=src \
         -Dsonar.java.binaries=target \
         -Dsonar.host.url=http://192.168.1.9:9000/"""
-        -Dsonar.coverage.exclusionsd=src/test/**/*,target/*
+        -Dsonar.coverage.exclusions=src/test/**/*,target/*
         }
   }
     stage("Deployment") {
