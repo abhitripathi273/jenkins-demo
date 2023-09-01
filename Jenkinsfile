@@ -16,7 +16,7 @@ node {
     	withSonarQubeEnv('AccountMangementSonar') {
             sh """${scannerHome}/bin/sonar-scanner \
          -Dsonar.projectVersion=1.0-SNAPSHOT \
-         -Dsonar.login=admin \
+        -Dsonar.login=admin \
         -Dsonar.password=sonar \
         -Dsonar.projectBaseDir=/var/jenkins_home/workspace/spring-boot-demo-pipeline/ \
         -Dsonar.projectKey=jenkins-sonar \
