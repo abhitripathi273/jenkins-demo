@@ -11,10 +11,15 @@ node {
       sh "./mvnw test -Punit"
     }
   stage('SonarQube Analysis') {
-    def scannerHome = tool 'SonarScanner';
-    withSonarQubeEnv() {
-      sh "${scannerHome}/bin/sonar-scanner"
-    }
+	  	environment {
+	        scannerHome = tool 'SonarQubeScanner'
+	    }
+    	withSonarQubeEnv('sonarqube') {
+            sh "${scannerHome}/bin/sonar-scanner"
+        }
+        timeout(time: 10, unit: 'MINUTES') {
+            waitForQualityGate abortPipeline: true
+        }
   }
     stage("Deployment") {
       sh 'nohup ./mvnw spring-boot:run -Dserver.port=8001 &'
