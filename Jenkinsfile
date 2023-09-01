@@ -7,12 +7,26 @@ node {
     sh "./mvnw clean install -DskipTests"
   }
 
-  stage("Tests and Deployment") {
-    stage("Runing unit tests") {
+   stage("Runing unit tests") {
       sh "./mvnw test -Punit"
     }
+  stage("build & SonarQube analysis") {
+          node {
+              withSonarQubeEnv('My SonarQube Server') {
+                 sh 'mvn clean package sonar:sonar'
+              }
+          }
+      }
+
+      stage("Quality Gate"){
+          timeout(time: 1, unit: 'HOURS') {
+              def qg = waitForQualityGate()
+              if (qg.status != 'OK') {
+                  error "Pipeline aborted due to quality gate failure: ${qg.status}"
+              }
+          }
+      }
     stage("Deployment") {
       sh 'nohup ./mvnw spring-boot:run -Dserver.port=8001 &'
     }
-  }
 }
