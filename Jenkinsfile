@@ -16,16 +16,16 @@ node {
 	    }
     	withSonarQubeEnv('sonarqube') {
             sh "${scannerHome}/bin/sonar-scanner"
-     -D sonar.projectVersion=1.0-SNAPSHOT \
-       -D sonar.login=admin \
-      -D sonar.password=sonar \
-      -D sonar.projectBaseDir=/var/jenkins_home/workspace/spring-boot-demo-pipeline/ \
-        -D sonar.projectKey=jenkins-sonar \
-        -D sonar.sourceEncoding=UTF-8 \
-        -D sonar.language=java \
-        -D sonar.sources=project/src/main \
-        -D sonar.tests=project/src/test \
-        -D sonar.host.url=http://localhost:9000/"""
+     -Dsonar.projectVersion=1.0-SNAPSHOT \
+       -Dsonar.login=admin \
+      -Dsonar.password=sonar \
+      -Dsonar.projectBaseDir=/var/jenkins_home/workspace/spring-boot-demo-pipeline/ \
+        -Dsonar.projectKey=jenkins-sonar \
+        -Dsonar.sourceEncoding=UTF-8 \
+        -Dsonar.language=java \
+        -Dsonar.sources=project/src/main \
+        -Dsonar.tests=project/src/test \
+        -Dsonar.host.url=http://localhost:9000/"""
             echo 'Static Analysis Completed'
         }
         timeout(time: 10, unit: 'MINUTES') {
