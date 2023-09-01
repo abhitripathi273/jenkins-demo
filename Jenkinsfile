@@ -23,7 +23,7 @@ node {
         -Dsonar.language=java \
         -Dsonar.sources=project/src/main \
         -Dsonar.tests=project/src/test \
-        -Dsonar.host.url=http://localhost:9000/"""
+        -Dsonar.host.url=http://192.168.1.9:9000/"""
         }
         timeout(time: 10, unit: 'MINUTES') {
             waitForQualityGate abortPipeline: true
