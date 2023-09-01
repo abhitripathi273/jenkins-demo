@@ -15,7 +15,7 @@ node {
 	        scannerHome = tool 'SonarQubeScanner'
 	    }
     	withSonarQubeEnv('sonarqube') {
-            sh "${scannerHome}/bin/sonar-scanner"
+            sh """${scannerHome}/bin/sonar-scanner"
      -Dsonar.projectVersion=1.0-SNAPSHOT \
        -Dsonar.login=admin \
       -Dsonar.password=sonar \
@@ -26,7 +26,6 @@ node {
         -Dsonar.sources=project/src/main \
         -Dsonar.tests=project/src/test \
         -Dsonar.host.url=http://localhost:9000/"""
-            echo 'Static Analysis Completed'
         }
         timeout(time: 10, unit: 'MINUTES') {
             waitForQualityGate abortPipeline: true
