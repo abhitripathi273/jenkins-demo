@@ -11,7 +11,7 @@ node {
       sh "./mvnw test -Punit"
     }
     stage('SonarQube Analysis') {
-    def mvn = tool 'Default Maven';
+    def mvn = tool 'mvn-3.9.4';
     withSonarQubeEnv() {
       	sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=jenkins-sonar -Dsonar.projectName='jenkins-sonar'"
     }
