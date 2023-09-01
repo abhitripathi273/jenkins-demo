@@ -11,9 +11,7 @@ node {
       sh "./mvnw test -Punit"
     }
   stage('SonarQube Analysis') {
-	  	environment {
-	        scannerHome = tool 'SonarScanner'
-	    }
+   def scannerHome = tool 'SonarScanner'
     	withSonarQubeEnv('AccountMangementSonar') {
             sh """${scannerHome}/bin/sonar-scanner"
      -Dsonar.projectVersion=1.0-SNAPSHOT \
