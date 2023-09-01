@@ -12,9 +12,9 @@ node {
     }
   stage('SonarQube Analysis') {
 	  	environment {
-	        scannerHome = tool 'SonarQubeScanner'
+	        scannerHome = tool 'SonarScanner'
 	    }
-    	withSonarQubeEnv('sonarqube') {
+    	withSonarQubeEnv('AccountMangementSonar') {
             sh """${scannerHome}/bin/sonar-scanner"
      -Dsonar.projectVersion=1.0-SNAPSHOT \
        -Dsonar.login=admin \
