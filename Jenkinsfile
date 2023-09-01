@@ -13,7 +13,7 @@ node {
   stage('SonarQube Analysis') {
    def scannerHome = tool 'SonarScanner'
     	withSonarQubeEnv('AccountMangementSonar') {
-            sh """/var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonarqube/bin/sonar-scanner \
+            sh """${scannerHome}/bin/sonar-scanner \
      -Dsonar.projectVersion=1.0-SNAPSHOT \
        -Dsonar.login=admin \
       -Dsonar.password=sonar \
