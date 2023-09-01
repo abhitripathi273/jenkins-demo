@@ -27,6 +27,7 @@ node {
         -Dsonar.host.url=http://192.168.1.9:9000/"""
         }
    }
+   
     stage("Deployment") {
       sh 'nohup ./mvnw spring-boot:run -Dserver.port=8001 &'
     }
