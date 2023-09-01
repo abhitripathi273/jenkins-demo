@@ -10,6 +10,7 @@ node {
    stage("Runing unit tests") {
       sh "./mvnw test -Punit"
     }
+    
   stage('SonarQube Analysis') {
    def scannerHome = tool 'SonarScanner'
     	withSonarQubeEnv('AccountMangementSonar') {
