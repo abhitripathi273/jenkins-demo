@@ -26,6 +26,10 @@ node {
         -Dsonar.java.binaries=target \
         -Dsonar.host.url=http://192.168.1.9:9000/"""
         }
+        
+         timeout(time: 10, unit: 'MINUTES') {
+            waitForQualityGate abortPipeline: true
+        }
    }
    
     stage("Deployment") {
